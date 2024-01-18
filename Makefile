@@ -15,12 +15,15 @@ DOCKER_IMAGE_TAG := latest
 DOCKER_USERNAME := maplepoet
 DOCKER_PASSWORD := Shanyang0711
 
+DOCKER_RUN_FLAGS := -p 8080:8080
+
 
 # Docker 构建相关参数
 DOCKER_BUILD_FLAGS := --rm -t $(DOCKER_IMAGE_NAME)
 
 # 默认目标，构建并上传 Docker 镜像
 .PHONY: all build push clean
+run: build run
 all: build push
 
 # 构建 Docker 镜像
@@ -33,6 +36,11 @@ build:
 push:
 	docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
 	docker push $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
+
+# 运行 Docker 镜像
+.PHONY: run
+run:
+	docker run $(DOCKER_RUN_FLAGS) $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
 
 # Target to remove the local Docker image
 .PHONY: clean
