@@ -11,7 +11,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", handler)
-	fmt.Println("Server is running on :8080")
-	http.ListenAndServe(":8080", nil)
+	//http.HandleFunc("/", handler)
+	//fmt.Println("Server is running on :8080")
+	//http.ListenAndServe(":8080", nil)
+	fmt.Println("Hello, World!")
+}
+
+func Add(a, b int) int {
+	return a + b
 }
